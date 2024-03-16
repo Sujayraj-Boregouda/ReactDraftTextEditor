@@ -1,14 +1,12 @@
 import './App.css';
-import TextEditor from './components/TextEditor';
+// import TextEditor from './components/TextEditor';
+import DraftEditor from './components/DraftEditor'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img className="App-logo" src='/logo.png' alt="logo" />
-        <h1>Text Editor</h1>
-      </header>
-        <TextEditor/>
+        {/* <TextEditor/> */}
+        <DraftEditor />
     </div>
   );
 }

@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Sujayraj-Boregouda/ReactDraftTextEditor/static/css/main.30563870.css",
+    "main.js": "/Sujayraj-Boregouda/ReactDraftTextEditor/static/js/main.01147eaa.js",
+    "index.html": "/Sujayraj-Boregouda/ReactDraftTextEditor/index.html",
+    "main.30563870.css.map": "/Sujayraj-Boregouda/ReactDraftTextEditor/static/css/main.30563870.css.map",
+    "main.01147eaa.js.map": "/Sujayraj-Boregouda/ReactDraftTextEditor/static/js/main.01147eaa.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.30563870.css",
+    "static/js/main.01147eaa.js"
+  ]
+}
