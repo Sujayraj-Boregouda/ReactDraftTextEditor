@@ -10,7 +10,9 @@ import "draft-js/dist/Draft.css";
 import Title from "./Title";
 import Button from "./Button";
 
-// Decorator Strategies
+// ** Decorator Strategies ** //
+
+// Decorator logic for Heading 1 Text 
 const HeadingDecorator = {
   strategy: (contentBlock, callback) => {
     const text = contentBlock.getText();
@@ -22,6 +24,7 @@ const HeadingDecorator = {
   component: (props) => <h1>{props.children}</h1>,
 };
 
+// Decorator logic for Bold Text 
 const BoldDecorator = {
   strategy: (contentBlock, callback) => {
     const text = contentBlock.getText();
@@ -33,7 +36,8 @@ const BoldDecorator = {
   component: (props) => <strong>{props.children}</strong>,
 };
 
-const ColorDecorator = {
+// Decorator logic for Red Color Text
+const RedColorDecorator = {
   strategy: (contentBlock, callback) => {
     const text = contentBlock.getText();
     const firstTwoChars = text.substring(0, 2);
@@ -44,6 +48,7 @@ const ColorDecorator = {
   component: (props) => <span style={{ color: 'red' }}>{props.children}</span>,
 };
 
+// Decorator logic for Underline Text
 const UnderlineDecorator = {
   strategy: (contentBlock, callback) => {
     const text = contentBlock.getText();
@@ -55,6 +60,7 @@ const UnderlineDecorator = {
   component: (props) => <span style={{ textDecoration: 'underline' }}>{props.children}</span>,
 };
 
+// Decorator logic for Highlighted Text
 const HighlightDecorator = {
   strategy: (contentBlock, callback) => {
     const text = contentBlock.getText();
@@ -70,7 +76,7 @@ const HighlightDecorator = {
 const decorator = new CompositeDecorator([
   HeadingDecorator,
   BoldDecorator,
-  ColorDecorator,
+  RedColorDecorator,
   UnderlineDecorator,
   HighlightDecorator,
 ]);
@@ -97,7 +103,12 @@ const DraftEditor = () => {
 
   const handleChange = (newEditorState) => {
     setEditorState(newEditorState);
-  };
+    const contentState = newEditorState.getCurrentContent();
+    const isEmpty = contentState.getPlainText().trim() === '';
+    if (showClearRef.current) {
+      showClearRef.current.style.display = isEmpty ? "none" : "block";
+    }
+  }; 
 
   const handleSave = () => {
     const contentState = editorState.getCurrentContent();
@@ -109,36 +120,42 @@ const DraftEditor = () => {
   };
 
   const handleClear = () => {
-      const confirmed = window.confirm("Are you sure you want to clear the data?");
-      if (confirmed) {
-          localStorage.removeItem("draftjs_content");
-          setEditorState(EditorState.createEmpty(decorator));
-          if (showClearRef.current) {
-              showClearRef.current.style.display = "none";
-          }
-      }
+    const confirmed = window.confirm("Are you sure you want to clear the Inputs Field?");
+    if (confirmed) {
+        localStorage.removeItem("draftjs_content");
+        setEditorState(EditorState.createEmpty(decorator));
+        if (showClearRef.current) {
+            showClearRef.current.style.display = "none";
+        }
+    }
   };
 
   return (
     <div className="text-editor-content">
-      <Title title="React Draft Text Editor" /> {/* Pass the title as a prop */}
-      <Button
-        className="clearBtn"
-        style={{ display: localStorage.getItem("draftjs_content") ? "block" : "none" }}
-        forwardRef={showClearRef}
-        onClick={handleClear}
-      >
-        Clear Data
-      </Button>
+      <Title title="React Draft Text Editor" />
+
+      {editorState.getCurrentContent().hasText() && ( 
+        <Button
+          className="clearBtn"
+          style={{ display: localStorage.getItem("draftjs_content") ? "block" : "none" }}
+          forwardRef={showClearRef}
+          onClick={handleClear}
+        >
+          Clear Data
+        </Button>
+      )}
 
       <Editor
         editorState={editorState}
         onChange={handleChange}
         placeholder="Enter some text..."
         ref={editorRef}
+        className="custom-editor"
       />
 
-      <Button className="saveBtn" onClick={handleSave}>Save</Button>
+      {editorState.getCurrentContent().hasText() && (
+        <Button className="saveBtn" onClick={handleSave}>Save Data</Button>
+      )}
     </div>
   );
 };

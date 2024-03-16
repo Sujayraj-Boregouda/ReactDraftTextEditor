@@ -24,7 +24,7 @@ body {
   margin: 150px auto 100px;
   padding: 50px;
   border: 5px solid #000;
-  height: 100vh;
+  height: 70vh;
 }
 
 .title {
@@ -42,7 +42,7 @@ body {
 
 .saveBtn {
   position: absolute;
-  top: -50px;
+  top: -55px;
   right: 0;
   background: green;
   color: #fff;
@@ -54,4 +54,52 @@ body {
   box-shadow: none;
   border-radius: 2px;
   cursor: pointer;
+}
+
+.clearBtn {
+  position: absolute;
+  top: -55px;
+  left: 0;
+  background: red;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 30px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-radius: 2px;
+  cursor: pointer; 
+}
+
+.custom-editor::placeholder {
+  color: gray;
+  font-style: italic !important;
+}
+
+
+@media only screen and (max-width: 1024px) {
+  .title {
+    top: -35px;
+      font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .title {
+      font-size: 16px;
+      width: 100%;
+      text-align: center;
+  }
+
+  .saveBtn,
+  .clearBtn {
+    top: unset;
+    bottom: -55px;
+  }
+
+  .text-editor-content {
+    margin: 100px auto 100px;
+    padding: 20px;
+  }
 }
