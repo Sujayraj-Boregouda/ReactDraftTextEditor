@@ -1,13 +1,11 @@
 import './App.css';
-// import TextEditor from './components/TextEditor';
 import DraftEditor from './components/DraftEditor'
 
 function App() {
-  return (
+  return (  
     <div className="App">
-        {/* <TextEditor/> */}
-        <DraftEditor />
-    </div>
+       <DraftEditor />
+   </div>
   );
 }
 
